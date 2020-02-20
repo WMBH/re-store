@@ -11,6 +11,20 @@ import ErrorIndicator from '../error-indicator';
 
 import './book-list.css';
 
+const BookList = ({ books }) => {
+	return (
+		<ul className="book-list">
+			{books.map((book) => {
+				return (
+					<li key={book.id}>
+						<BookListItem book={book} />
+					</li>
+				);
+			})}
+		</ul>
+	);
+};
+
 class BookListContainer extends Component {
 	componentDidMount() {
 		this.props.fetchBooks();
@@ -23,17 +37,7 @@ class BookListContainer extends Component {
 		} else if (error) {
 			return <ErrorIndicator />;
 		}
-		return (
-			<ul className="book-list">
-				{books.map((book) => {
-					return (
-						<li key={book.id}>
-							<BookListItem book={book} />
-						</li>
-					);
-				})}
-			</ul>
-		);
+		return <BookList books={books} />;
 	}
 }
 
